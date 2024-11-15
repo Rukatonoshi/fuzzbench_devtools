@@ -1,0 +1,21 @@
+# The number of trials of a fuzzer-benchmark pair.
+trials: 1 
+
+# The amount of time in seconds that each trial is run for.
+# 1 day = 24 * 60 * 60 = 86400
+max_total_time: #FIXME ADD THE TIME HERE :) 
+
+# The location of the docker registry.
+# See https://github.com/google/fuzzbench/issues/777
+docker_registry: gcr.io/fuzzbench
+
+# The local experiment folder that will store most of the experiment data.
+# Please use an absolute path.
+experiment_filestore: #FIXME ADD THE PATH TO experiment_filestore 
+
+# The local report folder where HTML reports and summary data will be stored.
+# Please use an absolute path.
+report_filestore: #FIXME ADD THE PATH TO report_filestore 
+
+# Flag that indicates this is a local experiment.
+local_experiment: true

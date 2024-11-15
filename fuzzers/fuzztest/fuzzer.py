@@ -9,6 +9,9 @@ def build():
     flags = [
         # List of flags to append to CFLAGS, CXXFLAGS during
         # benchmark compilation.
+        '-g',
+        '-DFUZZING_BUILD_MODE_UNSAFE_FOR_PRODUCTION', 
+        '-UNDEBUG',
         '-fsanitize=address', 
         '-fsanitize-coverage=inline-8bit-counters', 
         '-fsanitize-coverage=trace-cmp'
@@ -53,6 +56,7 @@ def fuzz(input_corpus, output_corpus, target_binary):
 
     fuzztest_env = os.environ.copy()
     fuzztest_env["FUZZTEST_REPRODUCERS_OUT_DIR"] = output_corpus
+    fuzztest_env["FUZZTEST_TESTSUITE_OUT_DIR"] = os.path.join(output_corpus, "testSuites")
 
     subprocess.call([
         target_binary,
@@ -60,6 +64,8 @@ def fuzz(input_corpus, output_corpus, target_binary):
         input_corpus,
         "--fuzz=LLVMFuzzer.TestOneInput",
         "--stack_limit_kb",
-        "102400"
+        "102400",
+        "--corpus_database",
+        output_corpus
     ], env=fuzztest_env)
 
