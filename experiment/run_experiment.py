@@ -511,6 +511,8 @@ class LocalDispatcher(BaseDispatcher):
             f'WORKER_POOL_NAME={self.config["worker_pool_name"]}')
         environment_args = [
             '-e',
+            'FORCE_LOCAL=True',
+            '-e',
             'LOCAL_EXPERIMENT=True',
             '-e',
             set_instance_name_arg,
