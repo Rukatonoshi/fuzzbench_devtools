@@ -65,7 +65,5 @@ def fuzz(input_corpus, output_corpus, target_binary):
         "--fuzz=LLVMFuzzer.TestOneInput",
         "--stack_limit_kb",
         "102400",
-        "--corpus_database",
-        output_corpus
     ], env=fuzztest_env)
 
