@@ -39,7 +39,7 @@ def build():
     os.environ['CC'] = 'clang'  # C compiler.
     os.environ['CXX'] = 'clang++'  # C++ compiler.
 
-    os.environ['FUZZER_LIB'] = '/fuzztest/coverage.cc.o /fuzztest/llvm_fuzzer_wrapper.cc.o /fuzztest/compatibility_mode.cc.o  /usr/lib/libfuzztest.a'  # Path to your compiled fuzzer lib.
+    os.environ['FUZZER_LIB'] = '/fuzztest/llvm_fuzzer_wrapper.cc.o /usr/lib/libfuzztest.a'  # Path to your compiled fuzzer lib.
     # Helper function that actually builds benchmarks using the environment you
     # have prepared.
     utils.build_benchmark()
