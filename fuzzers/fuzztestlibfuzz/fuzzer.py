@@ -40,6 +40,7 @@ def build():
     os.environ['CXX'] = 'clang++'  # C++ compiler.
 
     os.environ['FUZZER_LIB'] = '/fuzztest/llvm_fuzzer_wrapper.cc.o /usr/lib/libfuzztest.a'  # Path to your compiled fuzzer lib.
+    os.environ['ASAN_SYMBOLIZER_PATH'] = '/fuzztest/llvm-symbolizer'
     # Helper function that actually builds benchmarks using the environment you
     # have prepared.
     utils.build_benchmark()
@@ -73,6 +74,7 @@ def fuzz(input_corpus, output_corpus, target_binary):
     fuzztest_env = os.environ.copy()
     fuzztest_env["FUZZTEST_REPRODUCERS_OUT_DIR"] = output_corpus
     fuzztest_env["FUZZTEST_TESTSUITE_OUT_DIR"] = os.path.join(output_corpus, "testSuites")
+#    fuzztest_env["ASAN_SYMBOLIZER_PATH"] = "//llvm-symbolizer"
 
     subprocess.call([
         target_binary,
@@ -82,6 +84,7 @@ def fuzz(input_corpus, output_corpus, target_binary):
         "--stack_limit_kb",
         "102400",
         "--corpus_database",
-        output_corpus
+        output_corpus,
+        output_corpus,
     ],
                     env=fuzztest_env)
